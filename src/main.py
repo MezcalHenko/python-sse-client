@@ -1,6 +1,12 @@
+import os
+from dotenv import load_dotenv
 import sseclient
 
-messages = sseclient.SSEClient('http://localhost:5000/sse-subscribe')
+# load environment variables from .env file
+load_dotenv()
+
+SSE_SUBSCRIPTION_URL = os.getenv('SSE_SUBSCRIPTION_URL')
+messages = sseclient.SSEClient(SSE_SUBSCRIPTION_URL)
 
 for msg in messages:
     print(msg)
